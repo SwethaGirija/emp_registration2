@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    input[type="date"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+    }
+
+    button[type="submit"]:hover,
+    button[type="button"]:hover {
+      background-color: #0056b3;
+    }
+
+    #secondHalf {
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+  <h2>Employee Registration Form</h2>
+  <form id="registrationForm" action="connect.php" method="post" onsubmit="return validateForm()">
+    <div id="firstHalf">
+      <label for="full_name">Full Name:</label><br>
+      <input type="text" id="full_name" name="full_name" required><br><br>
+      
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+      
+      <label for="phone">Phone:</label><br>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required><br><br>
+      
+      <label for="address">Address:</label><br>
+      <textarea id="address" name="address" rows="4" cols="50" required></textarea><br><br>
+      
+      <button type="button" onclick="showSecondHalf()">Next</button>
+    </div>
+
+    <div id="secondHalf" style="display: none;">
+      <label for="position">Position:</label><br>
+      <input type="text" id="position" name="position" required><br><br>
+      
+      <label for="department">Department:</label><br>
+      <input type="text" id="department" name="department" required><br><br>
+      
+      <label for="salary">Salary:</label><br>
+      <input type="text" id="salary" name="salary" required><br><br>
+      
+      <label for="start_date">Start Date:</label><br>
+      <input type="date" id="start_date" name="start_date" required><br><br>
+      
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+
+  <script>
+    function showSecondHalf() {
+      var fullName = document.getElementById("full_name").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      var address = document.getElementById("address").value;
+
+      // Validate the inputs on the first page
+      if (fullName === "" || email === "" || phone === "" || address === "") {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      // Hide the first page and show the second page
+      document.getElementById("firstHalf").style.display = "none";
+      document.getElementById("secondHalf").style.display = "block";
+    }
+
+    function validateForm() {
+      var position = document.getElementById("position").value;
+      var department = document.getElementById("department").value;
+      var salary = document.getElementById("salary").value;
+      var startDate = document.getElementById("start_date").value;
+
+      // Validate the inputs on the second page
+      if (position === "" || department === "" || salary === "" || startDate === "") {
+        alert("Please fill in all fields.");
+        return false;
+      }
+
+      // Submit the form if validation passes
+      return true;
+    }
+  </script>
+</body>
+</html>
